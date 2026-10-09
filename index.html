@@ -72,7 +72,7 @@
       <option>Promotional Video Idea</option>
     </select>
 
-    <button onclick="generateDraft()">Generate Sample Draft</button>
+    <button id="generateButton" onclick="generateDraft()">Generate AI Content</button>
     <div id="result" aria-live="polite"></div>
   </div>
 
@@ -90,6 +90,7 @@
     }
 
     result.textContent = 'Generating your AI content...';
+    document.getElementById('generateButton').disabled = true;
 
     try {
       const response = await fetch(
