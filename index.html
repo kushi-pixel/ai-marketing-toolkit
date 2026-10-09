@@ -118,7 +118,9 @@
       console.error('Content generation error:', error);
       result.textContent =
         'Sorry, content could not be generated. Please try again.';
-    }
+    }finally {
+  document.getElementById('generateButton').disabled = false;
+}
   }
 </script>
 </body>
