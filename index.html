@@ -76,31 +76,49 @@
     <div id="result" aria-live="polite"></div>
   </div>
 
-  <script>
-    function generateDraft() {
-      const business =
-        document.getElementById('business').value.trim();
-      const language =
-        document.getElementById('language').value;
-      const format =
-        document.getElementById('format').value;
-      const result = document.getElementById('result');
+  
+<script>
+  async function generateDraft() {
+    const business = document.getElementById('business').value.trim();
+    const language = document.getElementById('language').value;
+    const format = document.getElementById('format').value;
+    const result = document.getElementById('result');
 
-      if (!business) {
-        result.textContent = 'Please enter your business type first.';
-        return;
+    if (!business) {
+      result.textContent = 'Please enter your business type first.';
+      return;
+    }
+
+    result.textContent = 'Generating your AI content...';
+
+    try {
+      const response = await fetch(
+        'https://round-waterfall-b0a6.kushigowdagreen.workers.dev',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            business,
+            language,
+            format,
+            details: 'Create engaging social media content for this business.'
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok || !data.content) {
+        throw new Error(data.error || 'Unable to generate content.');
       }
 
+      result.textContent = data.content;
+    } catch (error) {
+      console.error('Content generation error:', error);
       result.textContent =
-        'Your sample content brief\\n\\n' +
-        'Business: ' + business + '\\n' +
-        'Language: ' + language + '\\n' +
-        'Format: ' + format + '\\n\\n' +
-        'Content idea: Show customers a common problem ' +
-        'your business solves, demonstrate your solution, ' +
-        'and finish with a clear invitation to contact you.\\n\\n' +
-        'Note: This is a sample draft, not AI-generated content yet.';
+        'Sorry, content could not be generated. Please try again.';
     }
-  </script>
+  }
+</script>
 </body>
 </html>
