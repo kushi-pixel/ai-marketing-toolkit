@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rocket AI Content Studio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 720px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff7f5;
+      color: #262626;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px #00000010;
+    }
+    h1 { color: #e44848; }
+    label {
+      display: block;
+      margin-top: 18px;
+      font-weight: bold;
+    }
+    input, select, button {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input, select { border: 1px solid #ddd; }
+    button {
+      border: 0;
+      background: #e44848;
+      color: white;
+      cursor: pointer;
+      margin-top: 24px;
+    }
+    #result {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Rocket AI Content Studio 🚀</h1>
+    <p>Create social media content ideas for your business.</p>
+
+    <label for="business">Business type</label>
+    <input id="business" placeholder="e.g. Appliance shop">
+
+    <label for="language">Content language</label>
+    <select id="language">
+      <option>Kannada</option>
+      <option>Kanglish</option>
+      <option>English</option>
+    </select>
+
+    <label for="format">Content format</label>
+    <select id="format">
+      <option>Instagram Reel Script</option>
+      <option>Social Media Caption</option>
+      <option>Attention-Grabbing Hooks</option>
+      <option>Promotional Video Idea</option>
+    </select>
+
+    <button onclick="generateDraft()">Generate Sample Draft</button>
+    <div id="result" aria-live="polite"></div>
+  </div>
+
+  <script>
+    function generateDraft() {
+      const business =
+        document.getElementById('business').value.trim();
+      const language =
+        document.getElementById('language').value;
+      const format =
+        document.getElementById('format').value;
+      const result = document.getElementById('result');
+
+      if (!business) {
+        result.textContent = 'Please enter your business type first.';
+        return;
+      }
+
+      result.textContent =
+        'Your sample content brief\\n\\n' +
+        'Business: ' + business + '\\n' +
+        'Language: ' + language + '\\n' +
+        'Format: ' + format + '\\n\\n' +
+        'Content idea: Show customers a common problem ' +
+        'your business solves, demonstrate your solution, ' +
+        'and finish with a clear invitation to contact you.\\n\\n' +
+        'Note: This is a sample draft, not AI-generated content yet.';
+    }
+  </script>
+</body>
+</html>
